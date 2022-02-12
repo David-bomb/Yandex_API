@@ -15,7 +15,7 @@ class Example(QMainWindow):
         uic.loadUi("main.ui", self)
         keyboard.add_hotkey("PageUP", lambda: self.change_view(0))
         keyboard.add_hotkey("PageDOWN", lambda: self.change_view(1))
-        self.delta = 0.002
+        self.delta = 16
         self.setFixedSize(*SCREEN_SIZE)
         self.initUI()
         self.setWindowTitle('Кафты')
@@ -28,7 +28,7 @@ class Example(QMainWindow):
 
         params = {
             "ll": ",".join([lon, lat]),
-            "spn": ",".join([str(self.delta), str(self.delta)]),
+            "z": str(self.delta),
             "l": "map"
         }
         response = requests.get(api_server, params=params)
@@ -53,11 +53,13 @@ class Example(QMainWindow):
 
     def change_view(self, k):
         if k == 0:
-            self.delta += 0.001
+            self.delta += 1
         elif k == 1:
-            self.delta -= 0.001
+            self.delta -= 1
         if self.delta < 0:
             self.delta = 0
+        if self.delta > 21:
+            self.delta = 21
         self.delta = round(self.delta, 3)
         response = self.get_requests()
         with open(self.map_file, "wb") as file:
