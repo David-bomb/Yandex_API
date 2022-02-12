@@ -13,8 +13,8 @@ class Example(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi("main.ui", self)
-        self.setWindowTitle('Карты Человек-паук')
-        self.setFixedSize(1280, 720)
+        self.setWindowTitle('Кафты')
+        self.setFixedSize(*SCREEN_SIZE)
 
     def getImage(self):
         map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
@@ -37,9 +37,6 @@ class Example(QWidget):
 
         ## Изображение
         self.pixmap = QPixmap(self.map_file)
-        self.image = QLabel(self)
-        self.image.move(0, 0)
-        self.image.resize(600, 450)
         self.image.setPixmap(self.pixmap)
 
     def closeEvent(self, event):
