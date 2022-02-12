@@ -15,19 +15,22 @@ class Example(QMainWindow):
         uic.loadUi("main.ui", self)
         keyboard.add_hotkey("PageUP", lambda: self.change_view(0))
         keyboard.add_hotkey("PageDOWN", lambda: self.change_view(1))
+        keyboard.add_hotkey("UP", lambda: self.change_view(2))
+        keyboard.add_hotkey("DOWN", lambda: self.change_view(3))
+        keyboard.add_hotkey("LEFT", lambda: self.change_view(4))
+        keyboard.add_hotkey("RIGHT", lambda: self.change_view(5))
         self.delta = 16
         self.setFixedSize(*SCREEN_SIZE)
+        self.lon = "37.618879"
+        self.lat = "55.751426"
         self.initUI()
         self.setWindowTitle('Кафты')
 
     def get_requests(self):
         api_server = "http://static-maps.yandex.ru/1.x/"
 
-        lon = "37.618879"
-        lat = "55.751426"
-
         params = {
-            "ll": ",".join([lon, lat]),
+            "ll": ",".join([self.lon, self.lat]),
             "z": str(self.delta),
             "l": "map"
         }
@@ -60,6 +63,14 @@ class Example(QMainWindow):
             self.delta = 0
         if self.delta > 21:
             self.delta = 21
+        elif k == 2:
+            self.lat = str(round((float(self.lat) + 0.00045), 6))
+        elif k == 3:
+            self.lat = str(round((float(self.lat) - 0.00045), 6))
+        elif k == 4:
+            self.lon = str(round((float(self.lon) - 0.00045), 6))
+        elif k == 5:
+            self.lon = str(round((float(self.lon) + 0.00045), 6))
         self.delta = round(self.delta, 3)
         response = self.get_requests()
         with open(self.map_file, "wb") as file:
