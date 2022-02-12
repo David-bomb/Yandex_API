@@ -2,8 +2,6 @@ import sys
 import keyboard
 
 import requests
-from io import BytesIO
-from PIL import Image
 from PyQt5.QtGui import QPixmap
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
