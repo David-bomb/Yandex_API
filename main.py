@@ -24,7 +24,7 @@ class Example(QMainWindow):
         keyboard.add_hotkey("RIGHT", lambda: self.change_view(5))
         self.delta = 16
         self.setFixedSize(*SCREEN_SIZE)
-        self.shema.currentTextChanged.connect(lambda : self.change_view(6))
+        self.shema.currentTextChanged.connect(lambda: self.change_view(6))
         self.lon = "37.618879"
         self.lat = "55.751426"
         self.map = PEREVOD[self.shema.currentText()]
