@@ -52,7 +52,6 @@ class Example(QMainWindow):
 
 
     def change_view(self, k):
-        print(123)
         if k == 0:
             self.delta += 0.001
         elif k == 1:
