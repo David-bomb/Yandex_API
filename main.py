@@ -4,9 +4,12 @@ import keyboard
 import requests
 from PyQt5.QtGui import QPixmap
 from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QComboBox
 
 SCREEN_SIZE = [600, 450]
+PEREVOD = {'схема': 'map',
+           'спутник': 'sat',
+           'гибрид': 'sat,skl'}
 
 
 class Example(QMainWindow):
@@ -21,18 +24,19 @@ class Example(QMainWindow):
         keyboard.add_hotkey("RIGHT", lambda: self.change_view(5))
         self.delta = 16
         self.setFixedSize(*SCREEN_SIZE)
+        self.shema.currentTextChanged.connect(lambda : self.change_view(6))
         self.lon = "37.618879"
         self.lat = "55.751426"
+        self.map = PEREVOD[self.shema.currentText()]
         self.initUI()
         self.setWindowTitle('Кафты')
 
     def get_requests(self):
         api_server = "http://static-maps.yandex.ru/1.x/"
-
         params = {
             "ll": ",".join([self.lon, self.lat]),
             "z": str(self.delta),
-            "l": "map"
+            "l": self.map
         }
         response = requests.get(api_server, params=params)
 
@@ -71,6 +75,8 @@ class Example(QMainWindow):
             self.lon = str(round((float(self.lon) - 0.00045), 6))
         elif k == 5:
             self.lon = str(round((float(self.lon) + 0.00045), 6))
+        elif k == 6:
+            self.map = PEREVOD[self.shema.currentText()]
         self.delta = round(self.delta, 3)
         response = self.get_requests()
         with open(self.map_file, "wb") as file:

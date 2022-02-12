@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>600</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,44 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>450</width>
-     <height>600</height>
+     <width>600</width>
+     <height>450</height>
     </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
+  </widget>
+  <widget class="QComboBox" name="shema">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>81</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="duplicatesEnabled">
+    <bool>false</bool>
+   </property>
+   <item>
+    <property name="text">
+     <string>схема</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>спутник</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>гибрид</string>
+    </property>
+   </item>
   </widget>
  </widget>
  <resources/>
